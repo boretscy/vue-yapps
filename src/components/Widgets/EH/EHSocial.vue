@@ -64,10 +64,11 @@ export default {
     margin-top: 10px;
 }
 .YApps_Widget--Social_Items a {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background-color: var(--yapps-widget-fill-color);
+    width: 32px;
+    height: 32px;
+    border-radius: 5px;
+    background-color: var(--yapps-widget-darkbg-color);
+    border: 1px solid var(--yapps-widget-middlegray-color);
     padding: 5px;
     transition: .2s;
     margin-right: 10px;
@@ -81,7 +82,7 @@ export default {
     width: 20px;
     height: 20px;
     transition: .2s;
-    fill: var(--yapps-widget-bg-color);
+    fill: var(--yapps-widget-fill-color);
 }
 .YApps_Widget--Social_Items a:hover svg {
     transition: .2s;
