@@ -15,7 +15,7 @@
             <div class="YApps_Widget--Items">
                 <div
                     class="YApps_Widget--Item"
-                    v-for="(item, indx) in ShowedItems"
+                    v-for="(item, indx) in Widget.Items"
                     :key="indx"
                     >
                     <EHButtons
@@ -88,6 +88,8 @@ export default {
             Widget.Items.forEach(e => { e.Status = false });
             Widget.BackStatus = false;
             Widget.Status = true;
+
+            console.log( this.InitedItems );
 
             this.InitedItems.forEach( (item) => {
                 
