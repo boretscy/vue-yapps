@@ -10,7 +10,6 @@ YAppVue.use(YAppVuex);
 
 YAppAxios("https://apps.yug-avto.ru/API/get/widgets/?"+encodeURI('token='+window.yappstoken+'&r='+location.href))
     .then(response => {
-
         const YAppStore = new YAppVuex.Store({
             state: response.data,
             mutations: {
@@ -24,6 +23,5 @@ YAppAxios("https://apps.yug-avto.ru/API/get/widgets/?"+encodeURI('token='+window
             store: YAppStore,
         })
         .$mount('#YAppWidgets');
-
     })
     .catch(error => { console.log(error) });
