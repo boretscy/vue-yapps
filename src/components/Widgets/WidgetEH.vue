@@ -15,11 +15,16 @@
             <div class="YApps_Widget--Items">
                 <div
                     class="YApps_Widget--Item"
-                    v-for="(item, indx) in Widget.Items"
+                    v-for="(item, indx) in ShowedItems"
                     :key="indx"
                     >
                     <EHButtons
                         v-if="item.Type == 'buttons'"
+                        @show-widget="Show"
+                        :item="item"
+                        />
+                    <EHInvolv
+                        v-if="item.Type == 'involv'"
                         @show-widget="Show"
                         :item="item"
                         />
@@ -48,6 +53,7 @@
 import BaseCloseButton from '../Base/BaseCloseButton.vue';
 import BaseBackButton from '../Base/BaseBackButton.vue';
 import EHButtons from './EH/EHButtons.vue';
+import EHInvolv from './EH/EHInvolv.vue';
 import EHMessengers from './EH/EHMessengers.vue';
 import EHText from './EH/EHText.vue';
 import EHForm from './EH/EHForm.vue';
@@ -60,6 +66,7 @@ export default {
         BaseBackButton,
         EHSocial,
         EHButtons,
+        EHInvolv,
         EHMessengers,
         EHText,
         EHForm
@@ -88,8 +95,6 @@ export default {
             Widget.Items.forEach(e => { e.Status = false });
             Widget.BackStatus = false;
             Widget.Status = true;
-
-            console.log( this.InitedItems );
 
             this.InitedItems.forEach( (item) => {
                 
