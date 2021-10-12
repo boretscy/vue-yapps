@@ -15,7 +15,6 @@ YAppAxios("https://apps.yug-avto.ru/API/get/widgets/?"+encodeURI('token='+window
             state: response.data,
             mutations: {
         
-                // Forms
                 SetDelayedCall( state, value) { state.Form.DelayedCall.Status = Boolean( Number(value) ) },
                 setSendPhone( state, value ) { state.Form.SendData.Phone = value.replace(/[^\d;]/g, '') },
               }
