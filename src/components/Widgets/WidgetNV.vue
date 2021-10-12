@@ -20,7 +20,7 @@
                         :key="indx"
                         class="YApps_Widget--Item"
                         :class="{'YApps_Widget--Item-Active': item.Routed}"
-                        :style="{'width': 520/Widget.Items.length-5*(Widget.Items.length-1)+'px'}"
+                        :style="{'width': 520/Widget.Items.length-10*(Widget.Items.length-1)+'px'}"
                         @click="RouteTo(indx)"
                         >
                         <div class="YApps_Widget--Item_Title">{{ item.Title }}</div>
