@@ -1,0 +1,9 @@
+<template>
+  <g>
+    <circle
+      cx="37"
+      cy="37"
+      r="11"
+    />
+  </g>
+</template>
