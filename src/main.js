@@ -11,8 +11,6 @@ YAppVue.use(YAppVuex);
 
 YAppAxios("https://apps.yug-avto.ru/API/get/widgets/?"+encodeURI('token='+window.yappstoken+'&r='+location.href))
     .then(response => {
-        
-        console.log( response.data );
 
         const YAppStore = new YAppVuex.Store({
             state: response.data,
