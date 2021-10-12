@@ -285,6 +285,7 @@ export default {
             
             let Form = this.$store.state.Form;
             let Widget = this.$store.state.Widgets.Items[widget];
+            Form.SendData.EventAction = 'Заказ немедленного звонка';
 
             if ( Form.DelayedCall.Status ) {
 
@@ -292,12 +293,13 @@ export default {
                 Form.SendData.DelayedCall += ( Form.DelayedCall.Worktime.Status ) ? Form.DelayedCall.Worktime.TodayText+' в ' : Form.DelayedCall.Worktime.TomorrowText+' в ';
                 Form.SendData.DelayedCall += Form.DelayedCall.Worktime.Times[Form.DelayedCall.Worktime.Selected.HourIndex].Hour+':';
                 Form.SendData.DelayedCall += Form.DelayedCall.Worktime.Times[Form.DelayedCall.Worktime.Selected.HourIndex].Minutes[Form.DelayedCall.Worktime.Selected.MinutesIndex];
+                Form.SendData.EventAction = 'Заказ отложенного звонка';
             }
             
             Form.SendData.AppName = 'Widgets';
             Form.SendData.Id = Widget.Id;
             Form.SendData.EventCategory = null;
-            Form.SendData.EventType = null;
+            Form.SendData.EventType = Widget.UrlName;
             
             console.log( Form.SendData );
 
