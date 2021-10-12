@@ -109,7 +109,7 @@ export default {
 
                         } else {
 
-                            if ( Number(item.Cookie.Count) < Number(this.$parent.Cookie_Get(item.Cookie.Name)) ) {
+                            if ( Number(item.Cookie.Count) >= Number(this.$parent.Cookie_Get(item.Cookie.Name)) ) {
                                 
                                 this.$parent.Cookie_Set(item.Cookie.Name, Number(this.$parent.Cookie_Get(item.Cookie.Name))+1);
                                 item.Status = true;
