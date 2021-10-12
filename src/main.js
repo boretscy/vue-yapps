@@ -13,7 +13,12 @@ setTimeout(() => {
     YAppAxios("https://apps.yug-avto.ru/API/get/widgets/?"+encodeURI('token='+window.yappstoken+'&r='+location.href))
         .then(response => {
             const YAppStore = new YAppVuex.Store({
-                state: response.data
+                state: response.data,
+                mutations: {
+            
+                    SetDelayedCall( state, value) { state.Form.DelayedCall.Status = Boolean( Number(value) ) },
+                    setSendPhone( state, value ) { state.Form.SendData.Phone = value.replace(/[^\d;]/g, '') },
+                  }
             });
             new YAppVue({
                 render: h => h(YAppWidgets),

@@ -298,8 +298,6 @@ export default {
             Form.SendData.Id = Widget.Id;
             Form.SendData.EventCategory = null;
             Form.SendData.EventType = null;
-
-            
             
             console.log( Form.SendData );
 
