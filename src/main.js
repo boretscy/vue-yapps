@@ -8,7 +8,6 @@ import YAppWidgets from './App.vue';
 YAppVue.use(YAppVueMask);
 YAppVue.use(YAppVuex);
 
-
 YAppAxios("https://apps.yug-avto.ru/API/get/widgets/?"+encodeURI('token='+window.yappstoken+'&r='+location.href))
     .then(response => {
 
