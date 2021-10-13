@@ -85,6 +85,7 @@ a.YApps_Widget--Item_Item {
     font-size: 12px;
     text-decoration: none;
     display: inline-block;
+    cursor: pointer;
 }
 a.YApps_Widget--Item_Item:hover {
     text-decoration: none;
