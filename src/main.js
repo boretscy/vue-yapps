@@ -12,10 +12,8 @@ setTimeout(() => {
     
     YAppAxios("https://apps.yug-avto.ru/API/get/widgets/?"+encodeURI('token='+window.yappstoken+'&r='+location.href))
         .then(response => {
+            console.log( response.data );
             const YAppStore = new YAppVuex.Store({
-                
-                console.log( response.data );
-                
                 state: response.data,
                 mutations: {
                     SetDelayedCall( state, value) { state.Form.DelayedCall.Status = Boolean( Number(value) ) },
