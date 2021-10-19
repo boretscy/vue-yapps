@@ -13,6 +13,8 @@ setTimeout(() => {
     YAppAxios("https://apps.yug-avto.ru/API/get/widgets/?"+encodeURI('token='+window.yappstoken+'&r='+location.href))
         .then(response => {
             console.log( response.data );
+            console.log( window.dataLayer );
+            console.log(response.data.Description);
             const YAppStore = new YAppVuex.Store({
                 state: response.data,
                 mutations: {

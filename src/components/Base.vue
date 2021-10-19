@@ -92,10 +92,6 @@ export default {
         }, Helper.ActiveInterval*1000);
 
         this.startTimeouts();
-
-        let Description = this.$store.state.Description;
-        console.log(Description);
-
     },
     computed: {
         YAppsRootStyles: function() {
@@ -336,7 +332,7 @@ export default {
                 if ( typeof GoalData.CallTouch.Email != 'undefined' ) CallTouchURL += '&email='+GoalData.CallTouch.Email;
                 CallTouchURL += '&requestUrl='+location.href;
                 
-                var request = new XMLHttpRequest();
+                let request = new XMLHttpRequest();
                 request.open('GET', CallTouchURL, true);
                 request.send();
             }
