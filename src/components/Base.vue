@@ -306,6 +306,7 @@ export default {
             )
             .then(function (response) {
                 console.log(response);
+                console.log(window.dataLayer);
             })
             .catch(function (error) {
                 console.log(error);
