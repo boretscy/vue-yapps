@@ -307,6 +307,26 @@ export default {
             .then(function (response) {
                 console.log(response);
                 console.log(window.dataLayer);
+
+
+                this.PushGoal({
+
+                    Category: 'Виджеты',
+					IDToneCategory: Widget.IDToneCategory,
+					Action: Form.SendData.EventAction,
+					Name: 'ID: '+Widget.Id+'. '+Widget.Title,
+					Yandex: ( Form.DelayedCall.Status ) ? 'YApps_Goals-Widgets_'+Widget.Type.keyword+'-Send_Now' : 'YApps_Goals-Widgets_'+Widget.Type.keyword+'-Send_Later',
+                    YandexCounter: Form.SendData.YandexCounter,
+					CallTouch: {
+						Flag: true,
+						Phone: Form.SendData.Phone,
+                        Name: Form.SendData.Name || null,
+
+                        CTSiteID: Form.SendData.CTSiteID,
+                        CTSession: Form.SendData.CTSession
+
+					}
+                });
             })
             .catch(function (error) {
                 console.log(error);
@@ -314,23 +334,21 @@ export default {
         },
 
         PushGoal( GoalData ) {
-            
-            let Form = this.$store.state.Form;
 
             // Metrics
-            if ( typeof window.dataLayer != 'undefined' ) window.dataLayer.push({'event': 'FormSubmission', 'eventCategory': GoalData.IDToneCategory, 'eventAction': 'submit', 'eventLabel': GoalData.IDToneLabel || false});
+            if ( typeof window.dataLayer != 'undefined' ) window.dataLayer.push({'event': 'FormSubmission', 'eventCategory': GoalData.IDToneCategory, 'eventAction': 'submit' });
+            console.log( window.dataLayer );
             if ( typeof window.Matomo != 'undefined' ) window._paq.push(["trackEvent", GoalData.Category, GoalData.Action, GoalData.Name]);
-            if ( typeof window[Form.SendData.YandexCounter] != 'undefined' && typeof GoalData.Yandex != 'undefined' ) window[Form.SendData.YandexCounter].reachGoal(GoalData.Yandex);
+            if ( typeof window[GoalData.YandexCounter] != 'undefined' && typeof GoalData.Yandex != 'undefined' ) window[GoalData.YandexCounter].reachGoal(GoalData.Yandex);
             
             // CallTouch
             if ( GoalData.CallTouch.Flag ) { 
             
-                let CallTouchURL = 'https://api.calltouch.ru/calls-service/RestAPI/requests/'+Form.SendData.CTSiteID+'/register/';
+                let CallTouchURL = 'https://api.calltouch.ru/calls-service/RestAPI/requests/'+GoalData.CallTouch.CTSiteID+'/register/';
                 CallTouchURL += '?subject='+encodeURIComponent(GoalData.Name)+' '+encodeURIComponent(GoalData.Action);
-                CallTouchURL += '&sessionId='+window['call_value_'+Form.SendData.CTSession];
+                CallTouchURL += '&sessionId='+window['call_value_'+GoalData.CallTouch.CTSession];
                 CallTouchURL += '&phoneNumber='+GoalData.CallTouch.Phone.replace(/[^\d;]/g, '');
-                if ( typeof GoalData.CallTouch.Name != 'undefined' ) CallTouchURL += '&fio='+encodeURIComponent(GoalData.CallTouch.Name);
-                if ( typeof GoalData.CallTouch.Email != 'undefined' ) CallTouchURL += '&email='+GoalData.CallTouch.Email;
+                if ( GoalData.CallTouch.Name ) CallTouchURL += '&fio='+encodeURIComponent(GoalData.CallTouch.Name);
                 CallTouchURL += '&requestUrl='+location.href;
                 
                 let request = new XMLHttpRequest();
