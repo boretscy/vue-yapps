@@ -100,7 +100,6 @@ export default {
     background-color: var(--yapps-widget-bg-color);
     z-index: 14000;
     padding: 50px 20px 20px;
-	overflow: hidden;
     font-size: 15px;
     right: 150px;
     bottom: 50px;
@@ -114,7 +113,7 @@ export default {
     border-bottom: 10px solid transparent;
     position: absolute;
     right: -15px;
-    bottom: 30px;
+    bottom: 120px;
 }
 .YApps_Widget--Container a, .YApps_Widget--Container a:focus, .YApps_Widget--Container a:active, .YApps_Widget--Container a:visited {
 	color: var(--yapps-widget-text-color);
