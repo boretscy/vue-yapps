@@ -192,7 +192,7 @@ export default {
                 CallTouch: {Flag: false}
             });
 
-            if ( Widget.Route ) window.ymaps.geoObjects.remove( Widget.Route );
+            // if ( Widget.Route ) window.ymaps.geoObjects.remove( Widget.Route );
             window.ymaps.geolocation.get({provider: 'browser', autoReverseGeocode: true})
                 .then(function (result) {
                     userPosition = result.geoObjects.get(0).geometry.getCoordinates();
