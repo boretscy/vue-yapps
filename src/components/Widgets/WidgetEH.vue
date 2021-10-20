@@ -2,7 +2,7 @@
     <transition name="fade">
         <div 
             class="YApps_Widget--Container"
-            v-if="Widget.Status"
+            v-show="Widget.Status"
             >
             <BaseBackButton 
                 @back="Init"

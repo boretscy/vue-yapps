@@ -39,7 +39,7 @@ export default {
         BaseFormSuccess,
         BaseFormError
     },
-    mounted: () => {
+    mounted: function() {
 
         let Widget = this.$store.state.Widgets.Items.CI;
         Widget.PathDetector.path = window.location.pathname;
@@ -68,6 +68,8 @@ export default {
 
             let Widget = this.$store.state.Widgets.Items.CI;
             Widget.Status = true;
+            
+            this.SetContent();
             this.Reset();
         },
         Send() {
