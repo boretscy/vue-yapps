@@ -49,7 +49,13 @@ export default {
             if ( Widget.PathDetector.path != window.location.pathname ) {
                 
                 Widget.PathDetector.path = window.location.pathname;
-                this.SetContent();
+                Widget.PathDetector.level = Widget.PathDetector.path.split('/').length - 1;
+
+                Widget.PathDetector.content = 'List';
+                if ( Widget.PathDetector.level > Widget.Content.List.level && Widget.PathDetector.level <= Widget.Content.Model.level ) Widget.PathDetector.content = 'Model';
+                if ( Widget.PathDetector.level > Widget.Content.Model.level && Widget.PathDetector.level <= Widget.Content.Item.level ) Widget.PathDetector.content = 'Item';
+
+                console.log(Widget.PathDetector);
             }
         }, 50);
     },
@@ -68,25 +74,31 @@ export default {
 
             let Widget = this.$store.state.Widgets.Items.CI;
             Widget.Status = true;
-            
-            this.SetContent();
+
             this.Reset();
+
+            Widget.PathDetector.path = window.location.pathname;
+
+            setInterval( function() {
+                
+                if ( Widget.PathDetector.path != window.location.pathname ) {
+                    
+                    Widget.PathDetector.path = window.location.pathname;
+                    Widget.PathDetector.level = Widget.PathDetector.path.split('/').length - 1;
+
+                    Widget.PathDetector.content = 'List';
+                    if ( Widget.PathDetector.level > Widget.Content.List.level && Widget.PathDetector.level <= Widget.Content.Model.level ) Widget.PathDetector.content = 'Model';
+                    if ( Widget.PathDetector.level > Widget.Content.Model.level && Widget.PathDetector.level <= Widget.Content.Item.level ) Widget.PathDetector.content = 'Item';
+
+                    console.log(Widget.PathDetector);
+                }
+            }, 50);
         },
         Send() {
 
             this.$emit('send', 'CI');
         },
-        Hide() { this.$emit('hide-widget', 'CI') },
-        SetContent() {
-
-            let Widget = this.$store.state.Widgets.Items.CI;
-            Widget.PathDetector.level = Widget.PathDetector.path.split('/').length - 1;
-
-            Widget.PathDetector.content = 'List';
-            if ( Widget.PathDetector.level > Widget.Content.List.level && Widget.PathDetector.level <= Widget.Content.Model.level ) Widget.PathDetector.content = 'Model';
-            if ( Widget.PathDetector.level > Widget.Content.Model.level && Widget.PathDetector.level <= Widget.Content.Item.level ) Widget.PathDetector.content = 'Item';
-            
-        }
+        Hide() { this.$emit('hide-widget', 'CI') }
     }
 }
 </script>
