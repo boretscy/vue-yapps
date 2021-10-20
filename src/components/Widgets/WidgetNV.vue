@@ -176,10 +176,21 @@ export default {
             Widget.SecondView.Status = true;
 
         },
-        RouteTo( coords ) {
+        RouteTo( indx ) {
             
             let Widget = this.$store.state.Widgets.Items.NV;
+            let YandexCounter = this.$store.state.Form.SendData.YandexCounter;
             let userPosition;
+
+            this.$emit('push-goal', {
+                Category: 'Виджеты',
+                Action: 'Маршрут в ДЦ',
+                Name: 'Проложить маршрут в '+Widget.Items[indx].Title,
+                IDTone: {Flag: false},
+                YandexCounter: YandexCounter,
+                Yandex: 'YApps_Goals-Widgets_NV-Route',
+                CallTouch: {Flag: false}
+            });
 
             if ( Widget.Route ) window.ymaps.geoObjects.remove( Widget.Route );
             window.ymaps.geolocation.get({provider: 'browser', autoReverseGeocode: true})
@@ -191,7 +202,7 @@ export default {
                     
                     Widget.Route = new window.ymaps.multiRouter.MultiRoute(
                         {
-                            referencePoints: [userPosition, coords],
+                            referencePoints: [userPosition, Widget.Items[indx].Coords],
                             params: {results: 2}
                         },
                         {

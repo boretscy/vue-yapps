@@ -21,11 +21,13 @@
         />
     <WidgetMS 
         @hide-widget="HideWidget"
+        @push-goal="PushGoal"
         v-if="!!Widgets.MS"
         ref="WidgetMS"
         />
     <WidgetNV 
         @hide-widget="HideWidget"
+        @push-goal="PushGoal"
         v-if="!!Widgets.NV"
         ref="WidgetNV"
         />
@@ -311,7 +313,10 @@ export default {
                 let GoalData = {
 
                     Category: 'Виджеты',
-					IDToneCategory: Widget.IDToneCategory,
+					IDTone: {
+                        Flag: true,
+                        Category: Widget.IDToneCategory
+                    },
 					Action: Form.SendData.EventAction,
 					Name: 'ID: '+Widget.Id+'. '+Widget.Title,
 					Yandex: ( Form.DelayedCall.Status ) ? 'YApps_Goals-Widgets_'+Widget.Type.keyword+'-Send_Now' : 'YApps_Goals-Widgets_'+Widget.Type.keyword+'-Send_Later',
@@ -328,8 +333,7 @@ export default {
                 };
 
                 // Metrics
-                if ( typeof window.dataLayer != 'undefined' ) window.dataLayer.push({'event': 'FormSubmission', 'eventCategory': GoalData.IDToneCategory, 'eventAction': 'submit' });
-                console.log( window.dataLayer );
+                if ( typeof window.dataLayer != 'undefined' && GoalData.IDTone.Flag ) window.dataLayer.push({'event': 'FormSubmission', 'eventCategory': GoalData.IDTone.Category, 'eventAction': 'submit' });
                 if ( typeof window.Matomo != 'undefined' ) window._paq.push(["trackEvent", GoalData.Category, GoalData.Action, GoalData.Name]);
                 if ( typeof window[GoalData.YandexCounter] != 'undefined' && typeof GoalData.Yandex != 'undefined' ) window[GoalData.YandexCounter].reachGoal(GoalData.Yandex);
                 
@@ -356,8 +360,7 @@ export default {
         PushGoal( GoalData ) {
 
             // Metrics
-            if ( typeof window.dataLayer != 'undefined' ) window.dataLayer.push({'event': 'FormSubmission', 'eventCategory': GoalData.IDToneCategory, 'eventAction': 'submit' });
-            console.log( window.dataLayer );
+            if ( typeof window.dataLayer != 'undefined' && GoalData.IDTone.Flag ) window.dataLayer.push({'event': 'FormSubmission', 'eventCategory': GoalData.IDTone.Category, 'eventAction': 'submit' });
             if ( typeof window.Matomo != 'undefined' ) window._paq.push(["trackEvent", GoalData.Category, GoalData.Action, GoalData.Name]);
             if ( typeof window[GoalData.YandexCounter] != 'undefined' && typeof GoalData.Yandex != 'undefined' ) window[GoalData.YandexCounter].reachGoal(GoalData.Yandex);
             
