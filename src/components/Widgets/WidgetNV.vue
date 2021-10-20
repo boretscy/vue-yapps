@@ -21,14 +21,28 @@
                         class="YApps_Widget--Item"
                         :class="{'YApps_Widget--Item-Active': item.Routed}"
                         :style="{'width': 520/Widget.Items.length-10*(Widget.Items.length-1)+'px'}"
-                        @click="RouteTo(indx)"
-                        >
+                        @click="RouteTo(indx); EmitGoal({
+                            Category: 'Виджеты',
+                            Action: 'Маршрут в ДЦ',
+                            Name: 'Проложить маршрут в '+item.Title,
+                            IDTone: {Flag: false},
+                            Yandex: 'YApps_Goals-Widgets_NV-Route',
+                            CallTouch: {Flag: false}
+                        })">
                         <div class="YApps_Widget--Item_Title">{{ item.Title }}</div>
                         <div class="YApps_Widget--Item_Text">{{ item.Address }}</div>
                         <div class="YApps_Widget--Item_Icons">
                             <a 
                                 class="YApps_Widget--Item_Icons-Icon"
-                                :href="'tel:'+item.Phone">
+                                :href="'tel:'+item.Phone"
+                                @click.prevent="EmitGoal({
+                                    Category: 'Виджеты',
+                                    Action: 'Звонок в ДЦ',
+                                    Name: 'Звонок в '+item.Title,
+                                    IDTone: {Flag: false},
+                                    Yandex: 'YApps_Goals-Widgets_NV-Call',
+                                    CallTouch: {Flag: false}
+                                })">
                                 <icon-base icon-name="yappscallout"><icon-yappscallout /></icon-base>
                             </a>
                             <span class="YApps_Widget--Item_Icons-Icon" @click.prevent="showSecondView(indx)">
@@ -179,18 +193,7 @@ export default {
         RouteTo( indx ) {
             
             let Widget = this.$store.state.Widgets.Items.NV;
-            let YandexCounter = this.$store.state.Form.SendData.YandexCounter;
             let userPosition;
-
-            this.$emit('push-goal', {
-                Category: 'Виджеты',
-                Action: 'Маршрут в ДЦ',
-                Name: 'Проложить маршрут в '+Widget.Items[indx].Title,
-                IDTone: {Flag: false},
-                YandexCounter: YandexCounter,
-                Yandex: 'YApps_Goals-Widgets_NV-Route',
-                CallTouch: {Flag: false}
-            });
 
             // if ( Widget.Route ) window.ymaps.geoObjects.remove( Widget.Route );
             window.ymaps.geolocation.get({provider: 'browser', autoReverseGeocode: true})
@@ -212,6 +215,12 @@ export default {
 
                     window.ymaps.geoObjects.add( Widget.Route );
                 });
+        },
+        EmitGoal( goal ) {
+
+            let YandexCounter = this.$store.state.Form.SendData.YandexCounter;
+            goal.YandexCounter = YandexCounter;
+            this.$emit('push-goal', goal);
         }
     }
 }

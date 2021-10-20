@@ -6,12 +6,19 @@
         />
     <HelperButtons 
         @do-action="doAction"
+        @push-goal="PushGoal"
         />
     <WidgetCB 
         @send="Send" 
         @hide-widget="HideWidget"
         v-if="!!Widgets.CB"
         ref="WidgetCB"
+        />
+    <WidgetCI 
+        @send="Send" 
+        @hide-widget="HideWidget"
+        v-if="!!Widgets.CI"
+        ref="WidgetCI"
         />
     <WidgetLG 
         @send="Send" 
@@ -49,6 +56,7 @@ import YAppAxios from 'axios';
 import WidgetsCover from './Widgets/WidgetsCover.vue';
 import HelperButtons from './Helper/HelperButtons.vue';
 import WidgetCB from './Widgets/WidgetCB.vue';
+import WidgetCI from './Widgets/WidgetCI.vue';
 import WidgetLG from './Widgets/WidgetLG.vue';
 import WidgetMS from './Widgets/WidgetMS.vue';
 import WidgetNV from './Widgets/WidgetNV.vue';
@@ -60,6 +68,7 @@ export default {
         WidgetsCover,
         HelperButtons,
         WidgetCB,
+        WidgetCI,
         WidgetLG,
         WidgetMS,
         WidgetNV,
@@ -358,6 +367,8 @@ export default {
         },
 
         PushGoal( GoalData ) {
+
+            console.log( GoalData );
 
             // Metrics
             if ( typeof window.dataLayer != 'undefined' && GoalData.IDTone.Flag ) window.dataLayer.push({'event': 'FormSubmission', 'eventCategory': GoalData.IDTone.Category, 'eventAction': 'submit' });

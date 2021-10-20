@@ -16,7 +16,18 @@
                 <icon-base icon-name="yappsstartstop" v-if="Item.Name == 'Startstop'"><icon-yappsstartstop /></icon-base>
                 <icon-base icon-name="yappsquestion" v-if="Item.Name == 'Question'"><icon-yappsquestion /></icon-base>
                 <icon-base icon-name="yappscar" v-if="Item.Name == 'Car'"><icon-yappscar /></icon-base>
-                <icon-base icon-name="yappscallout" v-if="Item.Name == 'Call'"><icon-yappscallout /></icon-base>
+                <icon-base 
+                    icon-name="yappscallout" 
+                    v-if="Item.Name == 'Call'"
+                    @click.prevent="EminGoal({
+                        Category: 'Помощник',
+                        Action: 'Запуск звонилки',
+                        Name: 'Запуск звонилки',
+                        IDTone: {Flag: false},
+                        Yandex: 'YApps_Goals-Helper-Call',
+                        CallTouch: {Flag: false}
+                    })"
+                    ><icon-yappscallout /></icon-base>
                 <icon-base icon-name="yappsmap" v-if="Item.Name == 'Map'"><icon-yappsmap /></icon-base>
             </div>
             <div 
@@ -64,6 +75,12 @@ export default {
     },
     methods: {
         doAction( indx ) { this.$emit('do-action', indx) },
+        EmitGoal( goal ) {
+
+            let YandexCounter = this.$store.state.Form.SendData.YandexCounter;
+            goal.YandexCounter = YandexCounter;
+            this.$emit('push-goal', goal);
+        }
     }
 }
 </script>

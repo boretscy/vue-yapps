@@ -11,7 +11,6 @@
             <BaseCloseButton 
                 @hide="Hide"
                 />
-            <!-- <div class="YApps_Widget--Title">{{ Widget.Title}}</div> -->
             <div class="YApps_Widget--Items">
                 <div
                     class="YApps_Widget--Item"
