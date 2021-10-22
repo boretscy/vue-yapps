@@ -43,7 +43,7 @@ export default {
                         Widget.Items.forEach(e => { e.Status = false });
                         Widget.BackStatus = true;
                     }
-                    Widget.Items.forEach(e => { if ( e.ID == i.value ) e.Status = true });
+                    Widget.Items.forEach(e => { if ( e.Indx == i.value ) e.Status = true });
                     break;
 
                 default: return false;
