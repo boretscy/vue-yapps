@@ -77,8 +77,7 @@ export default {
         doAction( indx ) { this.$emit('do-action', indx) },
         EmitGoal( goal ) {
 
-            let YandexCounter = this.$store.state.Form.SendData.YandexCounter;
-            goal.YandexCounter = YandexCounter;
+            goal.YandexCounter = this.$store.state.Form.SendData.YandexCounter;
             this.$emit('push-goal', goal);
         }
     }

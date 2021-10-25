@@ -249,19 +249,25 @@ export default {
                 if ( Widgets[k].Timeouts ) {
 
                     if ( !Widgets[k].Cookies.Status ) {
-                    
-                        Widgets[k].TimeoutID = setTimeout(() => {
-                            App.ShowWidget(k);
-                        }, Widgets[k].Timeouts[0]*1000);
+                        
+                        if ( !Widgets[k].TimeoutID ) {
+
+                            Widgets[k].TimeoutID = setTimeout(() => {
+                                App.ShowWidget(k);
+                            }, Widgets[k].Timeouts[0]*1000);
+                        }
                     
                     } else {
 
                         if ( !App.Cookie_Get(Widgets[k].Cookies.Name) ) {
 
-                            Widgets[k].TimeoutID = setTimeout(() => {
-                                App.Cookie_Set(Widgets[k].Cookies.Name, 1);
-                                App.ShowWidget(k);
-                            }, Widgets[k].Timeouts[0]*1000);
+                            if ( !Widgets[k].TimeoutID ) {
+                                
+                                Widgets[k].TimeoutID = setTimeout(() => {
+                                    App.Cookie_Set(Widgets[k].Cookies.Name, 1);
+                                    App.ShowWidget(k);
+                                }, Widgets[k].Timeouts[0]*1000);
+                            }
 
                         } else {
                             
@@ -269,10 +275,13 @@ export default {
                                 
                                 let Count = Number(App.Cookie_Get(Widgets[k].Cookies.Name));
 
-                                Widgets[k].TimeoutID = setTimeout(() => {
-                                    App.Cookie_Set(Widgets[k].Cookies.Name, Count+1);
-                                    App.ShowWidget(k);
-                                }, Widgets[k].Timeouts[Count]*1000);
+                                if ( !Widgets[k].TimeoutID ) {
+                                    
+                                    Widgets[k].TimeoutID = setTimeout(() => {
+                                        App.Cookie_Set(Widgets[k].Cookies.Name, Count+1);
+                                        App.ShowWidget(k);
+                                    }, Widgets[k].Timeouts[Count]*1000);
+                                }
                             }
                         }
                     }
@@ -283,7 +292,7 @@ export default {
         stopTimeouts() {
 
             let Widgets = this.$store.state.Widgets.Items;
-            for ( let k in Widgets ) if ( Widgets[k].TimeoutID ) clearTimeout( Widgets[k].TimeoutID );
+            for ( let k in Widgets ) if ( Widgets[k].TimeoutID ) { clearTimeout( Widgets[k].TimeoutID ); Widgets[k].TimeoutID = null; }
         },
 
 
