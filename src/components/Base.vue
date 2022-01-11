@@ -370,9 +370,7 @@ export default {
                     request.send();
                 }
             })
-            .catch(function (error) {
-                console.log(error);
-            });
+            .catch(error => { console.log(error) })
         },
 
         PushGoal( GoalData ) {
