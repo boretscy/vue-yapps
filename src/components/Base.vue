@@ -316,17 +316,13 @@ export default {
             Form.SendData.Id = Widget.Id;
             Form.SendData.EventCategory = null;
             Form.SendData.EventType = Widget.UrlName;
-            
-            console.log( Form.SendData );
 
             YAppAxios.post(
                 'https://apps.yug-avto.ru/API/stat/?token=34b5ac8b71018c0bc7e5c050ed90b243',
                 Form.SendData,
                 {headers: Form.Headers}
             )
-            .then(function (response) {
-                console.log(response);
-                console.log(window.dataLayer);
+            .then(function () {
 
                 let GoalData = {
 
@@ -370,16 +366,13 @@ export default {
                     request.send();
                 }
             })
-            .catch(error => { console.log(error) })
         },
 
         PushGoal( GoalData ) {
 
-            console.log( GoalData );
-
             // Metrics
             if ( typeof window.dataLayer != 'undefined' && GoalData.IDTone.Flag ) window.dataLayer.push({'event': 'FormSubmission', 'eventCategory': GoalData.IDTone.Category, 'eventAction': 'submit' });
-            if ( typeof window.Matomo != 'undefined' ) window._paq.push(["trackEvent", GoalData.Category, GoalData.Action, GoalData.Name]);
+            // if ( typeof window.Matomo != 'undefined' ) window._paq.push(["trackEvent", GoalData.Category, GoalData.Action, GoalData.Name]);
             if ( typeof window[GoalData.YandexCounter] != 'undefined' && typeof GoalData.Yandex != 'undefined' ) window[GoalData.YandexCounter].reachGoal(GoalData.Yandex);
             
             // CallTouch

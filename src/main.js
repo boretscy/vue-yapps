@@ -13,7 +13,6 @@ setTimeout(() => {
     YAppAxios("https://apps.yug-avto.ru/API/get/widgets/?"+encodeURI('token='+window.yappstoken+'&r='+location.href))
         .then(response => {
             if ( response.data.Development ) console.log( response.data );
-            console('Cron git pull');
             console.log(response.data.Description);
             const YAppStore = new YAppVuex.Store({
                 state: response.data,
@@ -28,6 +27,5 @@ setTimeout(() => {
             })
             .$mount('#YAppWidgets');
         })
-        .catch(error => { console.log(error) });
 
 }, 500);
