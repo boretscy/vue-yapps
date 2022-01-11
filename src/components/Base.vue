@@ -352,7 +352,7 @@ export default {
 
                 // Metrics
                 if ( typeof window.dataLayer != 'undefined' && GoalData.IDTone.Flag ) window.dataLayer.push({'event': 'FormSubmission', 'eventCategory': GoalData.IDTone.Category, 'eventAction': 'submit' });
-                if ( typeof window.Matomo != 'undefined' ) window._paq.push(["trackEvent", GoalData.Category, GoalData.Action, GoalData.Name]);
+                // if ( typeof window.Matomo != 'undefined' ) window._paq.push(["trackEvent", GoalData.Category, GoalData.Action, GoalData.Name]);
                 if ( typeof window[GoalData.YandexCounter] != 'undefined' && typeof GoalData.Yandex != 'undefined' ) window[GoalData.YandexCounter].reachGoal(GoalData.Yandex);
                 
                 // CallTouch
