@@ -145,15 +145,13 @@ export default {
     height: 150px;
     overflow: hidden;
 }
-.YApps_Widget--Text p {
+.YApps_Widget--Content .YApps_Widget--Text p {
     margin: 0 0 15px;
 }
-.YApps_Widget--Text ul {
+.YApps_Widget--Content .YApps_Widget--Text ul {
     margin: 15px 0;
     padding: 0 0 0 15px;
-}
-.YApps_Widget--Text ul li {
-    list-style: disc;
+    list-style-type: disc;
 }
 
 @media (max-width: 767px) {
