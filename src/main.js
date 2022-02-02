@@ -1,12 +1,22 @@
+const YMappSettings = {
+    apiKey: '34ddb940-0941-4b80-ab80-b0aa351b6560',
+    lang: 'ru_RU',
+    coordorder: 'latlong',
+    enterprise: false,
+    version: '2.1'
+}
+
 import YAppVue from 'vue';
 import YAppVuex from 'vuex';
 import YAppVueMask from 'v-mask';
 import YAppAxios from 'axios';
+import YAppYmap from 'vue-yandex-maps'
 
 import YAppWidgets from './App.vue';
 
 YAppVue.use(YAppVueMask);
 YAppVue.use(YAppVuex);
+YAppVue.use(YAppYmap, YMappSettings)
 
 setTimeout(() => {
     
