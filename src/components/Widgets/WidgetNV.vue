@@ -373,6 +373,7 @@ export default {
         font-weight: 400;
         margin-bottom: 15px;
         line-height: 1.2em;
+        padding: 0 15px;
     }
     .YApps_Widget--SecondView_Text {
         color: var(--yapps-widget-text-color);
