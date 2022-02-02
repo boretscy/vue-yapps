@@ -131,6 +131,7 @@ export default {
         Init() {
 
             let Widget = this.$store.state.Widgets.Items.NV;
+            console.log(Widget);
             Widget.Status = true;
             Widget.SecondView.Status = false;
         },
