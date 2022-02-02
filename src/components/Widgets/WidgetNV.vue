@@ -56,12 +56,12 @@
                 class="YApps_Widget--Map"
                 :style="{'height': ((WindowWidth<=768)?'calc(100% - '+(70+Widget.Items.length*70)+'px)':'calc(100% - 100px)'), 'margin-top': ((WindowWidth<=768)?70+Widget.Items.length*70:100)+'px'}"
                 >
-                <yandex-map 
+                <yandex-mapyapps
                     :settings="Widget.Settings"
                     :coords="Widget.Items[0].Coords"
                     :zoom="10" 
                     >
-                    <ymap-marker
+                    <ymap-markeryapps
                         v-for="(item, indx) in Widget.Items"
                         :key="indx"
                         :coords="item.Coords" 
@@ -72,7 +72,7 @@
                             body: item.Address+'<br />'+item.Working
                         }"
                         />
-                </yandex-map>
+                </yandex-mapyapps>
             </div>
             <div 
                 class="YApps_Widget--SecondView"
@@ -107,7 +107,7 @@
 <script>
 import BaseCloseButton from '../Base/BaseCloseButton.vue';
 import BaseBackButton from '../Base/BaseBackButton.vue';
-import { yandexMap, ymapMarker } from 'vue-yandex-maps';
+import { yandexMapyapps, ymapMarkeryapps } from 'vue-yandex-maps';
 import IconBase from '../Base/IconBase.vue';
 import IconYappscallout from '../Base/icons/IconYappscallout.vue';
 import IconYappsmap from '../Base/icons/IconYappsmap.vue';
@@ -117,7 +117,7 @@ export default {
     components: {
         BaseCloseButton,
         BaseBackButton,
-        yandexMap, ymapMarker,
+        yandexMapyapps, ymapMarkeryapps,
         IconBase,
         IconYappscallout,
         IconYappsmap
