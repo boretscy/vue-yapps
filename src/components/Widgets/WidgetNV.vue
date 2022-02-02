@@ -57,6 +57,7 @@
                 :style="{'height': ((WindowWidth<=768)?'calc(100% - '+(70+Widget.Items.length*70)+'px)':'calc(100% - 100px)'), 'margin-top': ((WindowWidth<=768)?70+Widget.Items.length*70:100)+'px'}"
                 >
                 <yandex-map 
+                    :settings="Widget.Settings"
                     :coords="Widget.Items[0].Coords"
                     :zoom="10" 
                     >
@@ -106,20 +107,31 @@
 <script>
 import BaseCloseButton from '../Base/BaseCloseButton.vue';
 import BaseBackButton from '../Base/BaseBackButton.vue';
-// import { yandexMap, ymapMarker } from 'vue-yandex-maps';
+import { yandexMap, ymapMarker, loadYmap } from "vue-yandex-maps";
 import IconBase from '../Base/IconBase.vue';
 import IconYappscallout from '../Base/icons/IconYappscallout.vue';
 import IconYappsmap from '../Base/icons/IconYappsmap.vue';
+
+const YAppsYmapSettings = {
+    apiKey: '34ddb940-0941-4b80-ab80-b0aa351b6560',
+    lang: "ru_RU",
+    coordorder: "latlong",
+    version: "2.1"
+};
 
 export default {
     name: 'WidgetNV',
     components: {
         BaseCloseButton,
         BaseBackButton,
-        // yandexMap, ymapMarker,
+        yandexMap, ymapMarker,
         IconBase,
         IconYappscallout,
         IconYappsmap
+    },
+
+    async mounted() {
+        await loadYmap(YAppsYmapSettings);
     },
     computed: {
         Widget() { return this.$store.state.Widgets.Items.NV },
