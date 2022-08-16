@@ -1,10 +1,13 @@
 module.exports = {
-    css: {
-        extract: false,
-    },
-    configureWebpack: {
-      optimization: {
-        splitChunks: false
-      }
+  css: {
+      extract: false,
+  },
+
+  configureWebpack: {
+    optimization: {
+      splitChunks: false
     }
-  }
+  },
+
+  publicPath: ''
+}
