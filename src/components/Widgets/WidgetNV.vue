@@ -20,8 +20,7 @@
                         :key="indx"
                         class="YApps_Widget--Item"
                         :class="{'YApps_Widget--Item-Active': item.Routed}"
-                        :style="{'width': 520/Widget.Items.length-10*(Widget.Items.length-1)+'px'}"
-                        @click="RouteTo(indx); EmitGoal({
+                        @click="/* RouteTo(indx); */EmitGoal({
                             Category: 'Виджеты',
                             Action: 'Маршрут в ДЦ',
                             Name: 'Проложить маршрут в '+item.Title,
@@ -45,14 +44,21 @@
                                 })">
                                 <icon-base icon-name="yappscallout"><icon-yappscallout /></icon-base>
                             </a>
-                            <span class="YApps_Widget--Item_Icons-Icon" @click.prevent="showSecondView(indx)">
+                            <a
+                                :href="'https://yandex.ru/maps/?ll='+item.Coords[1]+','+item.Coords[0]+'&pt=38.943279%2C44.972416&z=15'"
+                                target="_blank"
+                                class="YApps_Widget--Item_Icons-Icon YApps_Widget--Item_Icons-Icon_ToMap"
+                                >
+                                <icon-base icon-name="yappsmap"><icon-yappsmap /></icon-base>
+                                </a>
+                            <span class="YApps_Widget--Item_Icons-Icon YApps_Widget--Item_Icons-Icon_toNav" @click.prevent="showSecondView(indx)">
                                 <icon-base icon-name="yappsmap"><icon-yappsmap /></icon-base>
                             </span>
                         </div>
                     </li>
                 </ul>
             </div>
-            <div 
+            <!-- <div 
                 class="YApps_Widget--Map"
                 :style="{'height': ((WindowWidth<=768)?'calc(100% - '+(70+Widget.Items.length*70)+'px)':'calc(100% - 100px)'), 'margin-top': ((WindowWidth<=768)?70+Widget.Items.length*70:100)+'px'}"
                 >
@@ -73,7 +79,7 @@
                         }"
                         />
                 </yandex-map>
-            </div>
+            </div> -->
             <div 
                 class="YApps_Widget--SecondView"
                 v-if="Widget.SecondView.Status">
@@ -107,32 +113,32 @@
 <script>
 import BaseCloseButton from '../Base/BaseCloseButton.vue';
 import BaseBackButton from '../Base/BaseBackButton.vue';
-import { yandexMap, ymapMarker, loadYmap } from "vue-yandex-maps";
+// import { yandexMap, ymapMarker, loadYmap } from "vue-yandex-maps";
 import IconBase from '../Base/IconBase.vue';
 import IconYappscallout from '../Base/icons/IconYappscallout.vue';
 import IconYappsmap from '../Base/icons/IconYappsmap.vue';
 
-const YAppsYmapSettings = {
-    apiKey: '34ddb940-0941-4b80-ab80-b0aa351b6560',
-    lang: "ru_RU",
-    coordorder: "latlong",
-    version: "2.1"
-};
+// const YAppsYmapSettings = {
+//     apiKey: '34ddb940-0941-4b80-ab80-b0aa351b6560',
+//     lang: "ru_RU",
+//     coordorder: "latlong",
+//     version: "2.1"
+// };
 
 export default {
     name: 'WidgetNV',
     components: {
         BaseCloseButton,
         BaseBackButton,
-        yandexMap, ymapMarker,
+        // yandexMap, ymapMarker,
         IconBase,
         IconYappscallout,
         IconYappsmap
     },
 
-    async mounted() {
-        await loadYmap(YAppsYmapSettings);
-    },
+    // async mounted() {
+    //     await loadYmap(YAppsYmapSettings);
+    // },
     computed: {
         Widget() { return this.$store.state.Widgets.Items.NV },
         WindowWidth() { return window.innerWidth }
@@ -202,32 +208,32 @@ export default {
             Widget.SecondView.Status = true;
 
         },
-        RouteTo( indx ) {
+        // RouteTo( indx ) {
             
-            let Widget = this.$store.state.Widgets.Items.NV;
-            let userPosition;
+        //     let Widget = this.$store.state.Widgets.Items.NV;
+        //     let userPosition;
 
-            // if ( Widget.Route ) window.ymaps.geoObjects.remove( Widget.Route );
-            window.ymaps.geolocation.get({provider: 'browser', autoReverseGeocode: true})
-                .then(function (result) {
-                    userPosition = result.geoObjects.get(0).geometry.getCoordinates();
-                    return userPosition;
-                })
-                .then(function(userPosition) {
+        //     // if ( Widget.Route ) window.ymaps.geoObjects.remove( Widget.Route );
+        //     window.ymaps.geolocation.get({provider: 'browser', autoReverseGeocode: true})
+        //         .then(function (result) {
+        //             userPosition = result.geoObjects.get(0).geometry.getCoordinates();
+        //             return userPosition;
+        //         })
+        //         .then(function(userPosition) {
                     
-                    Widget.Route = new window.ymaps.multiRouter.MultiRoute(
-                        {
-                            referencePoints: [userPosition, Widget.Items[indx].Coords],
-                            params: {results: 2}
-                        },
-                        {
-                            boundsAutoApply: true
-                        }
-                    );
+        //             Widget.Route = new window.ymaps.multiRouter.MultiRoute(
+        //                 {
+        //                     referencePoints: [userPosition, Widget.Items[indx].Coords],
+        //                     params: {results: 2}
+        //                 },
+        //                 {
+        //                     boundsAutoApply: true
+        //                 }
+        //             );
 
-                    window.ymaps.geoObjects.add( Widget.Route );
-                });
-        },
+        //             window.ymaps.geoObjects.add( Widget.Route );
+        //         });
+        // },
         EmitGoal( goal ) {
 
             let YandexCounter = this.$store.state.Form.SendData.YandexCounter;
@@ -241,13 +247,13 @@ export default {
 <style scoped>
 .YApps_Widget--Container {
     height: 600px;
-    width: 840px;
+    width: 640px;
 	text-align: center;
     position: fixed;
     left: 50%;
     top: 50%;
     margin-top: -300px;
-    margin-left: -420px;
+    margin-left: -320px;
     background-color: var(--yapps-widget-bg-color);
     z-index: 14000;
     padding: 50px 20px 20px;
@@ -281,10 +287,10 @@ export default {
 }
 .YApps_Widget--Title_Text {
     padding: 0;
-    margin: 0;
+    margin: 0 0 40px 0;
     float: left;
-    width: 35%;
-    position: absolute;
+    width: 100%;
+    /* position: absolute; */
     top: 0px;
     left: 0px;
 }
@@ -294,20 +300,25 @@ export default {
     list-style: none;
     font-size: 14px;
     float: right;
-    width: 65%;
+    width: 100%;
     line-height: 1.2em;
-    position: absolute;
+    /* position: absolute; */
     top: 0px;
     right: 0px;
 }
 .YApps_Widget--Item {
-    display: inline-block;
+    /* display: inline-block; */
     padding: 5px 0 0;
     margin: 0 5px;
-    width: 30.9%;
+    /* width: 30.9%; */
     cursor: pointer;
     border-bottom: 1px dotted var(--yapps-widget-fill-color);
     line-height: 1.4;
+    position: relative;
+}
+.YApps_Widget--Item_Title{
+    font-size: 18px;
+
 }
 .YApps_Widget--Item.YApps_Widget--Item-Active {
     border-bottom: 1px solid var(--yapps-widget-button-color);
@@ -318,8 +329,30 @@ export default {
     margin-bottom: 5px;
 }
 .YApps_Widget--Item_Icons {
-    display: none;
+        display: inline-block;
+        position: absolute;
+        bottom: 10px;
+        right: 0;
 }
+.YApps_Widget--Item_Icons-Icon {
+    display: inline-block;
+        width: 48px;
+        height: 48px;
+        border: 1px solid var(--yapps-widget-middlegray-color);
+        padding: 6px;
+        border-radius: 5px;
+        margin-left: 15px;
+        cursor: pointer;
+}
+.YApps_Widget--Item_Icons-Icon_toNav {
+    display: none;
+        
+}
+    .YApps_Widget--Item_Icons svg {
+        fill: var(--yapps-widget-fill-color);
+        width: 36px;
+        height: 36px;
+    }
 .YApps_Widget--Map {
     height: calc(100% - 100px);
     margin-top: 100px;
@@ -348,7 +381,7 @@ export default {
         top: 10px;
         right: 0;
     }
-    .YApps_Widget--Item_Icons-Icon {
+    .YApps_Widget--Item_Icons-Icon,  {
         display: inline-block;
         width: 48px;
         height: 48px;
@@ -389,7 +422,7 @@ export default {
     .YApps_Widget--SecondView_Text {
         color: var(--yapps-widget-text-color);
         margin-bottom: 15px;
-}
+    }
     .YApps_Widget--SecondView_Items {
         display: flex;
         justify-content: center;
@@ -406,6 +439,12 @@ export default {
     .YApps_Widget--SecondView_Items-Item img {
         width: 48px;
         height: 48px;
+    }
+    .YApps_Widget--Item_Icons-Icon_ToMap {
+        display: none;
+    }
+    .YApps_Widget--Item_Icons-Icon_toNav {
+        display: inline-block;
     }
 }
 </style>
