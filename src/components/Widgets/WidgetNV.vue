@@ -381,7 +381,7 @@ export default {
         top: 10px;
         right: 0;
     }
-    .YApps_Widget--Item_Icons-Icon,  {
+    .YApps_Widget--Item_Icons-Icon  {
         display: inline-block;
         width: 48px;
         height: 48px;
