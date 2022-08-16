@@ -191,6 +191,22 @@ export default {
 @media (max-width: 768px) {
     .YApps_Helper--Item_Container.MobileOnly {
         display: block;
+        bottom: 0!important;
+        right: 70px;
+        width: calc(100vw - 115px);
+    }
+    .YApps_Helper--Item_Container.MobileOnly .YApps_Helper--Item {
+        width: 100%;
+    }
+    .YApps_Helper--Item_Container.MobileOnly .YApps_Helper--Item_Description {
+        position: inherit;
+        right: 0;
+        display: block;
+        width: calc(100% - 30px);
+        text-align: center;
+        background: unset;
+        color: var(--yapps-widget-fill-color);
+        font-size: 18px;
     }
     .YApps_Helper--Container {
         position: fixed;
