@@ -6,14 +6,7 @@
         viewBox="0 0 74 74" 
         :aria-labelledby="iconName" 
         role="presentation"
-    >
-        <title
-        :id="iconName"
-        lang="en"
-        >{{ iconName }} icon</title>
-        <g>
-            <slot />
-        </g>
+    ><slot />
     </svg>
 </template>
 

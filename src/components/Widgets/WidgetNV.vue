@@ -34,6 +34,7 @@
                             <a 
                                 class="YApps_Widget--Item_Icons-Icon"
                                 :href="'tel:'+item.Phone"
+                                title="Позвонить"
                                 @click.prevent="EmitGoal({
                                     Category: 'Виджеты',
                                     Action: 'Звонок в ДЦ',
@@ -43,13 +44,16 @@
                                     CallTouch: {Flag: false}
                                 })">
                                 <icon-base icon-name="yappscallout"><icon-yappscallout /></icon-base>
+                                <span>Позвонить</span>
                             </a>
                             <a
                                 :href="'https://yandex.ru/maps/?ll='+item.Coords[1]+','+item.Coords[0]+'&pt=38.943279%2C44.972416&z=15'"
                                 target="_blank"
                                 class="YApps_Widget--Item_Icons-Icon YApps_Widget--Item_Icons-Icon_ToMap"
+                                title="Построить маршрут"
                                 >
                                 <icon-base icon-name="yappsmap"><icon-yappsmap /></icon-base>
+                                <span>Построить маршрут</span>
                                 </a>
                             <span class="YApps_Widget--Item_Icons-Icon YApps_Widget--Item_Icons-Icon_toNav" @click.prevent="showSecondView(indx)">
                                 <icon-base icon-name="yappsmap"><icon-yappsmap /></icon-base>
@@ -336,13 +340,28 @@ export default {
 }
 .YApps_Widget--Item_Icons-Icon {
     display: inline-block;
-        width: 48px;
-        height: 48px;
-        border: 1px solid var(--yapps-widget-middlegray-color);
-        padding: 6px;
-        border-radius: 5px;
-        margin-left: 15px;
-        cursor: pointer;
+    width: 48px;
+    height: 48px;
+    border: 1px solid var(--yapps-widget-middlegray-color);
+    padding: 6px;
+    border-radius: 5px;
+    margin-left: 15px;
+    cursor: pointer;
+    position: relative;
+}
+.YApps_Widget--Item_Icons-Icon span {
+    position: absolute;
+    display: none;
+    background-color: var(--yapps-widget-bg-color);
+    color: var(--yapps-widget-darkgray-color);
+    padding: 5px 15px;
+    border: 1px solid var(--yapps-widget-middlegray-color);
+    top: -40px;
+    right: 0;
+    width: max-content;
+}
+.YApps_Widget--Item_Icons-Icon:hover span {
+    display: inline-block;
 }
 .YApps_Widget--Item_Icons-Icon_toNav {
     display: none;
