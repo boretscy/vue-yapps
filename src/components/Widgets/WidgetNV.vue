@@ -307,10 +307,10 @@ export default {
     right: 0px;
 }
 .YApps_Widget--Item {
-    /* display: inline-block; */
-    padding: 5px 0 0;
+    display: inline-block;
+    padding: 15px 0 0;
     margin: 0 5px;
-    /* width: 30.9%; */
+    width: 440px;
     cursor: pointer;
     border-bottom: 1px dotted var(--yapps-widget-fill-color);
     line-height: 1.4;
@@ -331,8 +331,8 @@ export default {
 .YApps_Widget--Item_Icons {
         display: inline-block;
         position: absolute;
-        bottom: 10px;
-        right: 0;
+        bottom: 0;
+        right: -150px;
 }
 .YApps_Widget--Item_Icons-Icon {
     display: inline-block;
