@@ -207,6 +207,7 @@ export default {
         background: unset;
         color: var(--yapps-widget-fill-color);
         font-size: 18px;
+        opacity: 1;
     }
     .YApps_Helper--Container {
         position: fixed;
