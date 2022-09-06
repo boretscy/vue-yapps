@@ -250,7 +250,7 @@ export default {
 
 <style scoped>
 .YApps_Widget--Container {
-    height: 600px;
+    height: auto;
     width: 640px;
 	text-align: center;
     position: fixed;
