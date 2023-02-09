@@ -191,9 +191,9 @@ export default {
 @media (max-width: 768px) {
     .YApps_Helper--Item_Container.MobileOnly {
         display: block;
-        bottom: 0!important;
+        /* bottom: 0!important;
         right: 70px;
-        width: calc(100vw - 115px);
+        width: calc(100vw - 115px); */
     }
     .YApps_Helper--Item_Container.MobileOnly .YApps_Helper--Item {
         width: 100%;
@@ -201,7 +201,7 @@ export default {
     .YApps_Helper--Item_Container.MobileOnly .YApps_Helper--Item_Description {
         position: inherit;
         right: 0;
-        display: block;
+        display: none;
         width: calc(100% - 30px);
         text-align: center;
         background: unset;
