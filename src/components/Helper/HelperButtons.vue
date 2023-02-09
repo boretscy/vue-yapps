@@ -3,7 +3,6 @@
         <div 
             class="YApps_Helper--Item_Container"
             :class="{'MobileOnly': Item.MobileOnly}"
-            :style="{'bottom': Indx*(60+Buttons.Interval) + 'px'}"
             v-for="(Item, Indx) in Buttons.Items"
             :key="Indx"
             @click="doAction(Indx)"
@@ -72,6 +71,7 @@ export default {
                 }, b.Content.Delay*1000);
             }
         });
+        //:style="{'bottom': Indx*(60+Buttons.Interval) + 'px'}"
     },
     methods: {
         doAction( indx ) { this.$emit('do-action', indx) },
@@ -188,27 +188,37 @@ export default {
 .YApps_Helper--Item_Container.MobileOnly {
     display: none;
 }
+.YApps_Helper--Item_Container:first {
+    bottom: 0;
+}
+.YApps_Helper--Item_Container:nth-child(2) {
+    bottom: 90px;
+}
+.YApps_Helper--Item_Container:nth-child(3) {
+    bottom: 180px;
+}
+.YApps_Helper--Item_Container:nth-child(4) {
+    bottom: 270px;
+}
 @media (max-width: 768px) {
     .YApps_Helper--Item_Container.MobileOnly {
         display: block;
-        /* bottom: 0!important;
+        bottom: 0!important;
         right: 70px;
-        width: calc(100vw - 115px); */
+        /* width: calc(100vw - 115px); */
     }
-    .YApps_Helper--Item_Container.MobileOnly .YApps_Helper--Item {
+    /* .YApps_Helper--Item_Container.MobileOnly .YApps_Helper--Item {
         width: 100%;
-    }
+    } */
     .YApps_Helper--Item_Container.MobileOnly .YApps_Helper--Item_Description {
-        position: inherit;
-        right: 0;
         display: none;
-        /* display: block; */
+        /* display: block;
         width: calc(100% - 30px);
         text-align: center;
         background: unset;
         color: var(--yapps-widget-fill-color);
         font-size: 18px;
-        opacity: 1;
+        opacity: 1; */
     }
     .YApps_Helper--Container {
         position: fixed;
@@ -216,6 +226,23 @@ export default {
         bottom: 30px;
         width: 60px;
         z-index: 15000
+    }
+
+    .YApps_Helper--Item_Container:first {
+        bottom: 0;
+        right: 0;
+    }
+    .YApps_Helper--Item_Container:nth-child(2) {
+        bottom: 0;
+        right: 90px;
+    }
+    .YApps_Helper--Item_Container:nth-child(3) {
+        bottom: 0;
+        right: 180px;
+    }
+    .YApps_Helper--Item_Container:nth-child(4) {
+        bottom: 0;
+        right: 270px;
     }
 }
 </style>
