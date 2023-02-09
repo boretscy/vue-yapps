@@ -202,6 +202,7 @@ export default {
         position: inherit;
         right: 0;
         display: none;
+        /* display: block; */
         width: calc(100% - 30px);
         text-align: center;
         background: unset;
