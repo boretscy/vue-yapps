@@ -318,7 +318,7 @@ export default {
             Form.SendData.EventType = Widget.UrlName;
 
             YAppAxios.post(
-                'https://apps.yug-avto.ru/API/stat/?token=34b5ac8b71018c0bc7e5c050ed90b243',
+                'https://apps.yug-avto.ru/API/stat/?token=ef6541490c8bb9d481d37020b6a1953e',
                 Form.SendData,
                 {headers: Form.Headers}
             )
